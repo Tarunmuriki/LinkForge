@@ -1,0 +1,1 @@
+import {Router} from "express";import {redirect} from "../controllers/redirect.controller.js";import {redirectLimiter} from "../middleware/rateLimit.middleware.js";const r=Router();r.get("/:shortCode",redirectLimiter,redirect);export default r;

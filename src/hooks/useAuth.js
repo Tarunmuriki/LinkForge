@@ -1,0 +1,2 @@
+import {useQuery,useMutation,useQueryClient} from "@tanstack/react-query";import {api,unwrap} from "../services/api";
+export function useAuth(){const qc=useQueryClient();const q=useQuery({queryKey:["me"],queryFn:()=>api.get("/auth/me").then(unwrap),retry:false});const logout=useMutation({mutationFn:()=>api.post("/auth/logout"),onSuccess:()=>qc.setQueryData(["me"],null)});return {user:q.data?.user||null,isLoading:q.isLoading,logout:logout.mutateAsync};}

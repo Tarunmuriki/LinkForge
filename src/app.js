@@ -1,0 +1,5 @@
+import express from "express";import cors from "cors";import helmet from "helmet";import cookieParser from "cookie-parser";import morgan from "morgan";import {env} from "./config/env.js";import authRoutes from "./routes/auth.routes.js";import linkRoutes from "./routes/link.routes.js";import analyticsRoutes from "./routes/analytics.routes.js";import bioRoutes from "./routes/bio.routes.js";import redirectRoutes from "./routes/redirect.routes.js";import {notFound,errorHandler} from "./middleware/error.middleware.js";
+export const app=express();app.set("trust proxy",1);app.use(helmet());app.use(cors({origin:env.CLIENT_URL,credentials:true}));app.use(express.json({limit:"1mb"}));app.use(cookieParser());app.use(morgan("dev"));
+app.get("/api/health",(req,res)=>res.json({ok:true,service:"linkforge-api"}));
+app.use("/api/v1/auth",authRoutes);app.use("/api/v1/links",linkRoutes);app.use("/api/v1/analytics",analyticsRoutes);app.use("/api/v1/bio",bioRoutes);app.use("/r",redirectRoutes);
+app.use(notFound);app.use(errorHandler);

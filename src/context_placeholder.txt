@@ -1,0 +1,1 @@
+Auth context is implemented in hooks/useAuth.js for the starter.

@@ -1,0 +1,1 @@
+import {Router} from "express";import {requireAuth} from "../middleware/auth.middleware.js";import {overview,clicks,devices,referrers} from "../controllers/analytics.controller.js";const r=Router();r.use(requireAuth);r.get("/overview",overview);r.get("/clicks",clicks);r.get("/devices",devices);r.get("/referrers",referrers);export default r;
